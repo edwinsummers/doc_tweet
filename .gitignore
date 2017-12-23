@@ -17,3 +17,13 @@ secrets/
 
 # Virtualenv
 venv/
+
+# Local supporting files
+.pylintrc
+
+############################
+# Package-specific ignores #
+############################
+
+credentials.json
+
