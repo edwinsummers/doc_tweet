@@ -2,6 +2,16 @@
 
 A simple Python script to send daily [#100DaysOfCode](http://www.100daysofcode.com/) status updates. It was developed as a simple project for a #100DaysOfCode effort.
 
+## Setup
+
+Prior to running, edit 100DoCtweet.py to set the date on which you started your #100DaysOfCode. Replace the date in the following line:
+
+`START_DATE = datetime(2017, 12, 10)`
+
+with the date you started (order is YYYY, MM, DD). For example, if you started your #100DaysOfCode on 27 July 2017, edit the line to read:
+
+`START_DATE = datetime(2017, 7, 27)`
+
 ## Usage
 
 From the command line:
