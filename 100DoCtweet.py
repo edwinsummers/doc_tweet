@@ -2,7 +2,7 @@
 """Compose and tweet your daily #100DaysOfCode update"""
 
 
-from os import umask
+import os
 from sys import argv
 import json
 from datetime import datetime
@@ -94,6 +94,13 @@ def main():
     if len(argv) < 2:
         exit('Usage: {0} <message>'.format(argv[0]))
     message = argv[1]
+
+    try:
+        with open('config.json') as config_file:
+            user_prefs = json.load(config_file)
+    except FileNotFoundError:
+        # TODO: Add static items here or error message to specify defaults
+        pass
 
     twitter = load_tokens()
     tweet = compose_tweet(message)
