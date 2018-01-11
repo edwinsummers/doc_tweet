@@ -10,7 +10,7 @@ from getpass import getpass
 from twython import Twython
 
 
-START_DATE = datetime(2017, 12, 10)
+START_DATE = datetime(2018, 1, 10)
 HASHTAG = '#100DaysOfCode'
 DAY_PREFIX = 'D'
 
