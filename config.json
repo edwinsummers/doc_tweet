@@ -1,8 +1,1 @@
-{
-    "start_date": "01/10/2018",
-    "hashtag": "#100DaysOfCode",
-    "day_pfx": "D",
-    "round_pfx": "R",
-    "round_iteration": "",
-    "use_round": "False"
-}
+{"start_date": "2018-01-10", "hashtag": "#daysofcode"}
