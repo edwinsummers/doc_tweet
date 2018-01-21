@@ -1,18 +1,9 @@
-#!/usr/bin/env python
-"""Compose and tweet your daily #100DaysOfCode update"""
-
+"""Twitter authentication functions"""
 
 from os import umask
-from sys import argv
 import json
-from datetime import datetime
 from getpass import getpass
 from twython import Twython
-
-
-START_DATE = datetime(2018, 1, 10)
-HASHTAG = '#100DaysOfCode'
-DAY_PREFIX = 'D'
 
 
 def init_creds():
@@ -54,11 +45,11 @@ def get_oauth_tokens(credentials):
     return tokens
 
 
-def load_tokens():
+def load_tokens(file='credentials.json'):
     """Return Twython object using final OAuth tokens"""
 
     try:
-        with open('credentials.json') as creds_file:
+        with open(file) as creds_file:
             credentials = json.load(creds_file)
     except FileNotFoundError:
         credentials = init_creds()
@@ -69,40 +60,3 @@ def load_tokens():
     oauth_token_secret = credentials['oauth_token_secret']
 
     return Twython(consumer_key, consumer_secret, oauth_token, oauth_token_secret)
-
-
-def compute_day():
-    """Return integer representing increment since start date
-
-    Per good indexing, the start date is considered day 0 :)"""
-
-    elapsed = datetime.today() - START_DATE
-    return elapsed.days
-
-
-def compose_tweet(message):
-    """Return text to tweet by prefixing date index and hashtag"""
-
-    prefix = '{0}{1}'.format(DAY_PREFIX, compute_day())
-    tweet = '{0} {1} {2}'.format(prefix, message, HASHTAG)
-    return tweet
-
-
-def main():
-    """Main"""
-
-    if len(argv) < 2:
-        exit('Usage: {0} <message>'.format(argv[0]))
-    message = argv[1]
-
-    twitter = load_tokens()
-    tweet = compose_tweet(message)
-    print('Sending {} character status update...'.format(len(tweet)))
-    print()
-    result = twitter.update_status(status=tweet)
-    print('Set status update for user {0} to: {1}'.format(
-        result['user']['name'], result['text']))
-
-
-if __name__ == '__main__':
-    main()
